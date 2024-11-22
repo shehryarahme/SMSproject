@@ -1,0 +1,34 @@
+<!-- feedback.html -->
+{% extends 'base1.html' %}
+{% block title %}Course Feedback{% endblock %}
+{% block body %}
+    <div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+        <form method="POST" style="width: 100%; max-width: 600px;">
+            <h1 class="text-center" style="color: whitesmoke; margin-top: 100px;">Course Feedback</h1>
+            {% for course in courses %}
+                <div class="form-group">
+                    <label style="color: whitesmoke;" for="rating_{{ course.C_id }}">{{ course.CourseName }}</label>
+                    <input type="hidden" name="course_id" value="{{ course.C_id }}">
+                    <input type="range" id="rating_{{ course.C_id }}" name="rating_{{ course.C_id }}" min="0" max="100" value="50" step="1" class="feedback-range">
+                    <span id="ratingValue_{{ course.C_id }}">50</span>
+                    <script>
+                        const ratingInput_{{ course.C_id }} = document.getElementById('rating_{{ course.C_id }}');
+                        const ratingValue_{{ course.C_id }} = document.getElementById('ratingValue_{{ course.C_id }}');
+                        ratingInput_{{ course.C_id }}.addEventListener('input', function() {
+                            ratingValue_{{ course.C_id }}.textContent = this.value;
+                        });
+                    </script>
+                </div>
+            {% endfor %}
+            <button type="submit" class="btn btn-primary">Submit Feedback</button>
+        </form>
+    </div>
+
+    <style>
+        /* CSS to style the range input */
+        .feedback-range {
+            width: 100%; /* Set the width to 100% of the parent container */
+            margin: 10px 0; /* Add some margin for spacing */
+        }
+    </style>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'base2.html' %}
+{% block title %}ADMIN HOME{% endblock title %}
+{% block body %}
+<section id="intro">
+    <div class="intro-container" data-aos="zoom-in" data-aos-delay="100">
+        <div class="container">
+
+            <!-- Display Flash Messages -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            <div class="alert-container">
+                {% for category, message in messages %}
+                <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+            {% endwith %}
+
+            <h1>Assign Courses to Faculty</h1>
+            <form class="text-white py-3 px-3" method="POST" style="margin-left: 250px;">
+
+                {% for teacher in teachers %}
+                <h3 style="color:black; font-weight: bold;">{{ teacher.first_name }} {{ teacher.last_name }}</h3>
+
+                <!-- Table for each faculty member -->
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Select</th>
+                            <th>Course Name</th>
+                            <th>Section</th>  <!-- New header for section -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for course in courses %}
+                        <tr>
+                            <td>
+                                <input type="checkbox" name="courses_{{ teacher.sno }}" value="{{ course.C_id }}">
+                            </td>
+                            <td>{{ course.CourseName }}</td>
+                            <td>
+                                <input type="text" name="section_{{ course.C_id }}_{{ teacher.sno }}" placeholder="Section" maxlength="7">  <!-- Input for section -->
+                            </td </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% endfor %}
+          
+                <button type="submit">Assign Courses</button>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock body %}

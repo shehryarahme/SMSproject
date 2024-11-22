@@ -1,0 +1,38 @@
+{% extends 'base3.html' %}
+{% block title %}student home {% endblock title %}
+{% block body %}
+<section id="mark-attendance">
+    <div class="container">
+        <h1>Mark Attendance for {{ date }}</h1>
+        <form method="POST" action="{{ url_for('mark_attendance') }}">
+            <input type="hidden" name="sem_id" value="{{ sem_id }}">
+            <input type="hidden" name="course_id" value="{{ course_id }}">
+            <input type="hidden" name="date" value="{{ date }}">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Student No</th>
+                        <th>Name</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for student in students %}
+                    <tr>
+                        <td>{{ student.sno }}</td>
+                        <td>{{ student.first_name }}</td>
+                        <td>
+                            <select name="student_status_{{ student.sno }}">
+                                <option value="Present">P</option>
+                                <option value="Absent">A</option>
+                            </select>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <button type="submit" class="btn btn-success">Submit Attendance</button>
+        </form>
+    </div>
+</section>
+{% endblock body %}  <!-- Changed from body to content -->

@@ -1,0 +1,21 @@
+{% extends 'base3.html' %}
+{% block title %}Faculty Profile{% endblock title %}
+{% block body %}
+<div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
+    <
+        
+        <div class="card" style="border-radius: 15px; height: 480px; width: 600px;">
+            <div class="card-body" style="border: 2px solid purple; border-radius: 15px; margin: 3px; height: 450px;">
+                <h3 class="card-title"><strong>Faculty Information</strong></h4>
+                <p style="color:rgba(0, 0, 0, 0.671);">Name: {{ faculty.first_name }} {{ faculty.last_name }}</p>
+                <p style="color:rgba(0, 0, 0, 0.671);">Email: {{ faculty.email }}</p>
+                <p style="color:rgba(0, 0, 0, 0.671);">Phone: {{ faculty.phone }}</p>
+                <p style="color:rgba(0, 0, 0, 0.671);">Gender: {{ faculty.gender }}</p>
+                <p style="color:rgba(0, 0, 0, 0.671);">Address: {{ faculty.address }}</p>
+                <p style="color:rgba(0, 0, 0, 0.671);">Department: {{ faculty.department }}</p>
+                <p style="color:rgba(0, 0, 0, 0.671);">Date Hired: {{ faculty.date_hired.strftime('%Y-%m-%d') }}</p>
+            </div>
+        
+    </div>
+</div>
+{% endblock body %}

@@ -1,0 +1,37 @@
+<!-- transcript.html -->
+{% extends 'base1.html' %}
+{% block title %}Student Transcript{% endblock title %}
+{% block body %}
+    <div class="container">
+        <h1>Student Transcript</h1>
+        <h3 style="color: gainsboro;">Cumulative GPA (CGPA): {{ cgpa | round(2) }}</h3>
+
+        {% for semester_id, data in semester_data.items() %}
+            <h4>Semester: {{ semester_names[semester_id] }}</h4>  <!-- Display Semester Name -->
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Course Name</th>
+                        <th>Credit Hours</th>
+                        <th>Total Marks</th>
+                        <th>Grade</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for course in data.courses %}
+                    <tr>
+                        <td>{{ course.course_name }}</td>
+                        <td>{{ course.credit_hours }}</td>
+                        <td>{{ course.marks }}</td>
+                        <td>{{ course.grade }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <p><strong>Total Marks for Semester:</strong> {{ data.total_marks }}</p>
+            <p><strong>Total Credit Hours for Semester:</strong> {{ data.total_credit_hours }}</p>
+            <p><strong>SGPA:</strong> {{ data.gpa | round(2) }}</p>  <!-- Display GPA -->
+            <hr>
+        {% endfor %}
+    </div>
+    {% endblock body %}

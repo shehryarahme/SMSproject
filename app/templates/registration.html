@@ -1,0 +1,53 @@
+{% extends 'base2.html' %}
+{% block title %}Student Home{% endblock title %}
+{% block body %}
+<div class="container mt-5" style="background-color: white;">
+    <h2 style="color:black;">Registration Settings</h2>
+    <p style="color:black;">
+        Current Status: <strong style="color:rgb(199, 18, 18);">
+            {{ 'Open' if registration else 'Closed' }}
+        </strong>
+    </p>
+    
+    <form method="POST">
+        <div class="form-group">
+            <label for="semester" style="color:black;">Select Semester:</label>
+            <select name="semester" id="semester" class="form-control" required>
+                <option value="" disabled selected>Select a semester</option>
+                {% for semester in semesters %}
+                    <option value="{{ semester.sem_id }}">{{ semester.semester }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="fee_pr_crd_hr" style="color:black;">Fee Per Credit Hour:</label>
+            <input 
+                type="number" 
+                step="0.01" 
+                name="fee_pr_crd_hr" 
+                id="fee_pr_crd_hr" 
+                class="form-control" 
+                placeholder="Enter fee per credit hour" 
+                value="{{ current_fee if current_fee else '' }}" 
+                required
+            >
+        </div>
+
+        <div class="form-group">
+            <button type="submit" name="action" value="open" class="btn btn-success">Open Registration</button>
+            <button type="submit" name="action" value="close" class="btn btn-danger">Close Registration</button>
+        </div>
+    </form>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="alert alert-dismissible fade show mt-3" role="alert">
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+</div>
+{% endblock body %}

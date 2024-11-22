@@ -1,0 +1,39 @@
+{% extends 'base1.html' %}
+{% block title %}Assessment Marks{% endblock title %}
+{% block body %}
+    <div class="container">
+        <h1>Assessment Marks</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Assessment Type</th>
+                    <th>Obtained Marks</th>
+                    <th>Total Marks</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Final</td>
+                    <td>{{ marks.Final }}</td>
+                    <td>50</td>
+                </tr>
+                <tr>
+                    <td>Midterm</td>
+                    <td>{{ marks.Midterm }}</td>
+                    <td>30</td>
+                </tr>
+                <tr>
+                    <td>Quiz</td>
+                    <td>{{ marks.Quiz }}</td>
+                    <td>10</td>
+                </tr>
+                <tr>
+                    <td>Project</td>
+                    <td>{{ marks.Project }}</td>
+                    <td> 10</td>
+                </tr>
+            </tbody>
+        </table>
+        <h3>Total Marks: {{ marks.Final + marks.Midterm + marks.Quiz + marks.Project }}</h3>
+    </div>
+{% endblock body %}

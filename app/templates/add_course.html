@@ -1,0 +1,48 @@
+{% extends 'base2.html' %}
+{% block title %} Home{% endblock title %}
+
+{% block body %}
+<section id="intro"></section>
+<div class="intro-container" data-aos="zoom-in" data-aos-delay="100">
+  <div class="container">
+
+    <!-- Display Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <div class="alert-container">
+      {% for category, message in messages %}
+      <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+
+    <form class="text-white py-3 px-3" action="/add_course" method="POST" style=" margin-left: 250px;">
+      <div class="form-group">
+        <label for="CourseName" class="form-label">Course Name</label>
+        <input type="text" class="form-control mb-2" name="CourseName" id="CourseName" aria-describedby="emailHelp">
+      </div>
+      <div class="form-group">
+        <label for="crdHours" class="form-label">Credit Hours</label>
+        <input type="text" class="form-control mb-2" name="crdHours" id="crdHours" aria-describedby="emailHelp">
+      </div>
+      <div class="form-group">
+        <label for="CourseCode" class="form-label">Course Code</label>
+        <input type="text" class="form-control mb-2" name="CourseCode" id="CourseCode" aria-describedby="emailHelp">
+      </div>
+
+
+
+
+      <button id="signbutton" type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+</div>
+</section>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+{% endblock body %}

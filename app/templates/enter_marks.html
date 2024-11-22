@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enter Marks</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Enter Marks for {{ assessment_type }}</h1>
+        <form method="POST">
+            <div id="student-marks">
+                {% for student in enrolled_students %}
+                <div class="form-group row">
+                    <label for="marks_{{ student.student_sno }}" class="col-sm-6 col-form-label">{{ student.student_enrollment.first_name }} {{ student.student_enrollment.last_name }} (S.No: {{ student.student_sno }})</label>
+                    <div class="col-sm-6">
+                        <input type="number" name="marks_{{ student.student_sno }}" id="marks_{{ student.student_sno }}" class="form-control" required>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <button type="submit" class="btn btn-primary">Submit Marks</button>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

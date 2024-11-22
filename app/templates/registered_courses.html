@@ -1,0 +1,26 @@
+{% extends 'base1.html' %}
+
+{% block title %}Register Course {% endblock title %}
+
+{% block body %}
+
+<div style="background-color: white; color: black; padding: 100px;  border-radius: 8px; width: 60%; margin: auto;">
+    <h2 style="color: black; font-weight: bold; padding-top: 100px;">Registered Courses for {{ user.first_name }} {{ user.last_name }}</h2>
+
+    {% for semester, courses in courses_by_semester.items() %}
+        <h2 style="color: #4f0d56; font-weight: bold;">{{ semester }}</h2>
+        <ul style="list-style-type: none; padding-left: 100px;">
+            {% for course in courses %}
+                <li style="display: flex; justify-content: space-between; padding: 5px 50px;">
+                    <span>{{ course }}</span>
+                    {% if semester == semname.semester %}
+                    
+                    <a href="/drop_course/{{ course }}/{{ semname.sem_id }}/{{ user.sno }}" class="btn btn-outline-dark btn-sm mx-1" style="margin-left: 10px;">Drop</a> {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p style="color: black;">No courses registered for any semester.</p>
+    {% endfor %}
+</div>
+{% endblock body %}

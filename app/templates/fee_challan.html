@@ -1,0 +1,47 @@
+<!-- fee_challan.html -->
+{% extends 'base1.html' %}
+{% block title %}Fee Challan{% endblock title %}
+{% block body %}
+    <div class="container">
+        <h1>Fee Challan</h1>
+        <div class="container" style="background-color: whitesmoke; width: 600px; " >
+        <h3>Student Details</h3>
+        <p style="color: black;"><strong>Name:</strong> {{ student.first_name }} {{ student.last_name }}</p>
+        <p style="color: black;"><strong>Student ID:</strong> {{ student.sno }}</p>
+        <p style="color: black;"><strong>Email:</strong> {{ student.email }}</p>
+        <p style="color: black;"><strong>Phone:</strong> {{ student.phone }}</p>
+        
+        <h3>Semester Details</h3>
+        
+        <p style="color: black;"><strong>Semester Name:</strong> {{ semester.semester }}</p>
+
+        <h3>Fees Details</h3>
+        <p style="color: black;"><strong>Total Credit Hours:</strong> {{ total_credit_hours }}</p>
+        <p style="color: black;"><strong>Total Fees:</strong> {{ total_fees | round(2) }}</p>
+        <button  type="button" onclick="return false;" style="background-color: lightskyblue;">Print</button>
+
+        <hr>
+    </div>
+        <h3 style="color: wheat;">Course Details:</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Course Name</th>
+                    <th>Credit Hours</th>
+                    <th>Fee per Credit Hour</th>
+                    <th>Total Fee</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for enrollment in enrollments %}
+                <tr>
+                    <td>{{ enrollment.course_enrollment.CourseName }}</td>
+                    <td>{{ enrollment.course_enrollment.crdHours }}</td>
+                    <td>{{ fee_per_credit_hour }}</td>
+                    <td>{{ enrollment.course_enrollment.crdHours * fee_per_credit_hour }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock body %}

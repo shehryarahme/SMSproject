@@ -1,0 +1,41 @@
+{% extends 'base1.html' %}
+{% block title %}View Attendance{% endblock title %}
+{% block body %}
+<div class="container">
+    <h1 class="text-center">View Attendance</h1>
+    <form method="POST" action="{{ url_for('view_attendance') }}">
+        <div class="form-group">
+            <label for="course_id">Select Course:</label>
+            <select name="course_id" id="course_id" class="form-control" required>
+                <option value="">Select a course</option>
+                {% for course in courses %}
+                <option value="{{ course.C_id }}">{{ course.CourseName }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">View Attendance</button>
+    </form>
+
+    {% if records %}
+    <h2 class="mt-4">Attendance Records for {{ selected_course_id }}</h2>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for record in records %}
+            <tr>
+                <td>{{ record.date.strftime('%Y-%m-%d') }}</td>
+                <td>{{ record.status }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>No attendance records found for the selected course.</p>
+    {% endif %}
+</div>
+{% endblock body %}

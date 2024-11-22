@@ -1,0 +1,57 @@
+{% extends 'login_base.html' %}
+{% block body %}
+ 
+<body>
+
+  <!-- ======= Intro Section ======= -->
+  <section id="intro">
+    <div class="intro-container" data-aos="zoom-in" data-aos-delay="100">
+
+      <h1  style="color:white" class="mb-4 pb-0" id="logh"><span style="color:rgb(160, 144, 164)">Login</span></h1>
+
+      <!-- Flash messages with alert styling -->
+      {% with messages=get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+      {% for category, message in messages %}
+
+      <div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+        {{message}}
+      </div>
+
+      {% endfor %}
+      {% endif %}
+      {% endwith %}
+
+      <!-- Login form -->
+       
+      <form class="py-3 px-3" action="/login_admin" method="post" style="max-width: 600px; margin: 0 auto; padding: 20px; font-size: 18px;">
+        <div class="form-group">
+          <label class="form-label" for="user_name" style="color: white;">User Name</label>
+          <input type="text" class="form-control mb-2" name="user_name" id="user_name" >
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="password" style="color: white;">Password</label>
+          <input type="password" class="form-control" id="password" name="password">
+        </div>
+        <div style="width: 30%; margin: 0 auto;">
+          <button type="submit" id="signbutton" class="form-control">Login</button>
+        </div>
+        
+        
+      </form>
+    </div>
+  </section><!-- End Intro Section -->
+
+  <!-- Vendor JS Files -->
+  <script src="static/assets/vendor/jquery/jquery.min.js"></script>
+  <script src="static/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="static/assets/vendor/aos/aos.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="static/assets/js/main.js"></script>
+
+</body>
+
+
+{% endblock body %}

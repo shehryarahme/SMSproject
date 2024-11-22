@@ -1,0 +1,64 @@
+{% extends 'base2.html' %}
+{% block title %}Average Ratings{% endblock title %}
+{% block body %}
+<section id="average-ratings">
+    <div class="container">
+        <h1>Average Ratings for Courses</h1>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Course Name</th>
+                    <th>Average Rating</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for course, average_rating in average_ratings.items() %}
+                <tr>
+                    <td>{{ course.CourseName }}</td>  <!-- Display course name -->
+                    <td>
+                        {% if average_rating is not none %}
+                            {{ average_rating | round(2) }}  <!-- Round to 2 decimal places -->
+                        {% else %}
+                            No ratings available
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Optional: You can visualize the ratings using Chart.js -->
+        <canvas id="ratingsChart" width="400" height="200" style="background-color: white;"></canvas>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script>
+            const ctx = document.getElementById('ratingsChart').getContext('2d');
+            const labels = {{ average_ratings.keys() | map(attribute='CourseName') | list | tojson }};  // Extract course names
+            const data = {
+                labels: labels,
+                datasets: [{
+                    label: 'Average Ratings',
+                    data: {{ average_ratings.values() | list | tojson }},
+                    backgroundColor: 'rgba(75, 192, 192, 0.5)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            };
+
+            const config = {
+                type: 'bar',
+                data: data,
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            };
+
+            const ratingsChart = new Chart(ctx, config);
+        </script>
+    </div>
+</section>
+{% endblock body %}

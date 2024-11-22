@@ -1,0 +1,54 @@
+{% extends 'base1.html' %}
+{% block title %}student home{% endblock title %}
+{% block body %}
+
+<div class="session">
+    <label for="session">SESSION</label>
+    <select id="session">
+        <option>2023 AUTUMN SEMESTER</option>
+    </select>
+</div>
+<div class="session">
+    <label for="course">Course</label>
+    <select id="course">
+        <option>2023 AUTUMN SEMESTER</option>
+    </select>
+</div>
+<div class="buttons">
+    <button>CO321</button>
+    <button>CO215</button>
+    <button>CS670</button>
+</div>
+<div class="table-container">
+    <div class="table-header">
+        <span><input type="date" value="2023-10-23"></span>
+        <div>CS670</div>
+        <div>ARTIFICIAL INTELLIGENCE</div>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Roll No</th>
+                <th>Student Name</th>
+                <th class="attendance-select">Attendance</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>CSB21001</td>
+                <td>EMILY JOHNSON</td>
+                <td class="attendance-select">
+                    <select>
+                        <option value="P">P</option>
+                        <option value="A">A</option>
+                        <option value="L">L</option>
+                    </select>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+{% endblock body %}

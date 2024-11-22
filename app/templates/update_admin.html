@@ -1,0 +1,46 @@
+{% extends 'base2.html' %}
+{% block title %} Home{% endblock title %}
+{% block body %}
+
+<div class="container my-3">
+    <h1 class="mb-4 pb-0">UPDATE TODO</h1>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <div class="alert-container">
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+
+    <!-- calling update with sending param id -->
+    <form action="/update_admin/{{admin.id}}" method="POST">
+        <div class="row mb-3">
+            <label for="user_name" class="col-sm-3 col-form-label text-white">User Name</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" name="user_name" id="user_name" value="{{admin.user_name}}">
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label for="passwrod" class="col-sm-3 col-form-label text-white">Password</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" name="password" id="password" value="{{admin.password}}">
+            </div>
+        </div>
+
+
+
+        <button id="signbutton" type="submit" class="btn btn-primary ">UPDATE</button>
+    </form>
+</div>
+
+<!-- Optional JavaScript; choose one of the two! -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+    crossorigin="anonymous"></script>
+
+{% endblock body %}

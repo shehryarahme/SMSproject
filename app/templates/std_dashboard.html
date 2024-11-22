@@ -1,0 +1,26 @@
+{% extends 'base1.html' %}
+
+{% block title %}Student Home{% endblock title %}
+
+{% block body %}
+<section id="intro">
+    <div class="intro-container" data-aos="zoom-in" data-aos-delay="100">
+        <h1 id="wel" class="mb-4 pb-0">STUDENT MANAGEMENT SYSTEM</h1>
+        <p id="tag" class="mb-4 pb-2" style="border: 2px solid #c11f73;; border-radius: 0.5rem; padding: 1rem;">WELCOME {{ user.first_name }} {{ user.last_name }}</p>
+
+        <!-- Flash messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-messages">
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                            {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+    </div> 
+</section>
+{% endblock body %}
